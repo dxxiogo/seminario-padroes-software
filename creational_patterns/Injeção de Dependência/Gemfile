@@ -1,0 +1,9 @@
+source 'https://rubygems.org'
+
+# Gems para injeção de dependência
+gem 'dry-container'
+gem 'dry-auto_inject'
+
+# Para instalar as dependências, execute no terminal: bundle install
+
+
