@@ -1,20 +1,36 @@
 require_relative 'game'
 require_relative 'enemy'
+# Create an initial game state
+game1 = Game.new
+game1.add_enemy(Enemy.new("Orc", 80))
+game2 = Game.new
+game2.add_enemy(Enemy.new("Goblin", 60))
 
-gm = Game.new
-gm.add_enemy Enemy.new("B")
+puts "Original Game 1 State:"
+game1.render
 
-while true
-  gm.render
-  inp = gets.chomp
+# Shallow copy the game
+shallow_copied_game = game1.clone
+shallow_copied_game.kill_one(1)
 
-  if inp == "kill"
-    puts "Which enemy do you want to kill?"
-    pos = gets.chomp.to_i
-    gm.killOne pos
-  elsif inp == "end"
-    break
-  end
-end
+puts "\nAfter killing one enemy in Shallow Copied Game:"
+puts "Shallow Copied Game State:"
+shallow_copied_game.render
 
-puts "Exited"
+puts "Original Game 1 State (after shallow copy modification):"
+game1.render
+
+
+puts "Original Game 2 State:"
+game2.render
+
+# Deep copy the game
+deep_copied_game = game2.deep_clone
+deep_copied_game.kill_one(2)
+
+puts "\nAfter killing one enemy in Deep Copied Game:"
+puts "Deep Copied Game State:"
+deep_copied_game.render
+
+puts "Original Game 2 State (after deep copy modification):"
+game2.render
